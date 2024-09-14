@@ -11,21 +11,25 @@ class Grid:
 
     
     def _prepare_grid(self):
-        maze = [[Cell(row, col) for col in range(self.columns)] 
+        return [[Cell(row, col) for col in range(self.columns)] 
         for row in range(self.rows)]
-        return maze
     
     def _configure_cells(self):
         for elem in self.grid:
             for cell in elem:
                 row, col = cell.row, cell.column
-                if col > 0: cell.add_neighbor("west", self[row, col - 1])
-                if col < self.columns - 1: cell.add_neighbor("east", self[row, col + 1])
-                if row > 0: cell.add_neighbor("north", self[row - 1, col])
-                if row < self.rows - 1: cell.add_neighbor("south", self[row + 1, col])
+                cell.add_neighbor("west", self[row, col - 1])
+                cell.add_neighbor("east", self[row, col + 1])
+                cell.add_neighbor("north", self[row - 1, col])
+                cell.add_neighbor("south", self[row + 1, col])
 
     def __getitem__(self, x):
-        return self.grid[x[0]][x[1]]
+        row = x[0]
+        col = x[1]
+        if row in range(0, self.rows) and col in range(0, self.columns):
+            return self.grid[row][col]
+        else:
+            return None
     
     def size(self):
         return self.rows * self.columns

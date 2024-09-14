@@ -7,10 +7,8 @@ class TriangleGrid(Grid):
         for cell in self.each_cell():
             row, col = cell.row, cell.column
 
-            if col > 0:
-                cell.add_neighbor("west", self[row, col - 1])
-            if col < self.columns - 1:
-                cell.add_neighbor("east", self[row, col + 1])
+            cell.add_neighbor("west", self[row, col - 1])
+            cell.add_neighbor("east", self[row, col + 1])
             
             if (row + col) % 2 == 0:
                 if row < self.rows - 1:

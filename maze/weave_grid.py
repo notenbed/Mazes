@@ -17,10 +17,10 @@ class WeaveGrid(Grid):
         for elem in self.grid:
             for cell in elem:
                 row, col = cell.row, cell.column
-                if col > 0: cell.add_neighbor("west", self[row, col - 1])
-                if col < self.columns - 1: cell.add_neighbor("east", self[row, col + 1])
-                if row > 0: cell.add_neighbor("north", self[row - 1, col])
-                if row < self.rows - 1: cell.add_neighbor("south", self[row + 1, col])
+                cell.add_neighbor("west", self[row, col - 1])
+                cell.add_neighbor("east", self[row, col + 1])
+                cell.add_neighbor("north", self[row - 1, col])
+                cell.add_neighbor("south", self[row + 1, col])
     
     def tunnel_under(self, over_cell):
         under_cell = UnderCell(over_cell)

@@ -9,10 +9,9 @@ class Grid3D(Grid):
         super().__init__(rows, columns)
 
     def _prepare_grid(self):
-        maze = [[[Cell3D(level, row, col) for level in range(self.levels)]
+        return [[[Cell3D(level, row, col) for level in range(self.levels)]
                  for col in range(self.columns)]
                  for row in range(self.rows)]
-        return maze
     
     def _configure_cells(self):
         for level in self.grid:
@@ -20,15 +19,21 @@ class Grid3D(Grid):
                 for cell in row:
                     level, row, col = cell.level, cell.row, cell.column
                     
-                    if row > 0: cell.add_neighbor("north", self[level, row - 1, col])
-                    if row < self.rows - 1: cell.add_neighbor("south", self[level, row + 1, col])
-                    if col > 0: cell.add_neighbor("west", self[level, row, col - 1])
-                    if col < self.columns - 1: cell.add_neighbor("east", self[level, row, col + 1])
-                    if level > 0: cell.add_neighbor("down", self[level - 1, row, col])
-                    if level < self.levels - 1: cell.add_neighbor("up", self[level + 1, row, col])
+                    cell.add_neighbor("north", self[level, row - 1, col])
+                    cell.add_neighbor("south", self[level, row + 1, col])
+                    cell.add_neighbor("west", self[level, row, col - 1])
+                    cell.add_neighbor("east", self[level, row, col + 1])
+                    cell.add_neighbor("down", self[level - 1, row, col])
+                    cell.add_neighbor("up", self[level + 1, row, col])
 
     def __getitem__(self, x):
-        return self.grid[x[0]][x[1]][x[2]]
+        row = x[0]
+        col = x[1]
+        level = x[2]
+        if row in range(0, self.rows) and col in range(0, self.columns) and level in range(0, self.levels):
+            return self.grid[row][col][level]
+        else:
+            return None
     
     def random_cell(self):
         level = random.randint(0, self.levels - 1)

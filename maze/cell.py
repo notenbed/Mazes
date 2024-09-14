@@ -34,7 +34,7 @@ class Cell():
         return self.neighbor(selection)
 
     def link(self, cell, bidi=True):
-        if cell != "":
+        if cell != "" and cell != None:
             self.links.append(cell)
             if bidi: cell.links.append(self)
 

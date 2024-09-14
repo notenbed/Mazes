@@ -6,13 +6,13 @@ from .weave_cells import *
 from .cell3d import *
 from .grid3d import *
 from .cube_cell import *
+from .polar_cell import *
 from .hemisphere_cell import *
 
 from .distance_grid import *
 from .mask import *
 from .masked_grid import *
 from .colored_grid import *
-from .polar_cell import *
 from .polar_grid import *
 from .hex_grid import *
 from .triangle_grid import *

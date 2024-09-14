@@ -5,11 +5,9 @@ class Distances():
         self.cells[root] = 0
 
     def __getitem__(self, cell):
-        if cell in self.cells.keys():
-            return self.cells[cell]
-        else:
-            return None
-    
+        obj = self.cells[cell] if cell in self.cells.keys() else None
+        return obj
+        
     def __setitem__(self, key, value):
         self.cells[key] = value
 
