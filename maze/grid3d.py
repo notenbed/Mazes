@@ -27,9 +27,7 @@ class Grid3D(Grid):
                     cell.add_neighbor("up", self[level + 1, row, col])
 
     def __getitem__(self, x):
-        row = x[0]
-        col = x[1]
-        level = x[2]
+        row, col, level = x
         if row in range(0, self.rows) and col in range(0, self.columns) and level in range(0, self.levels):
             return self.grid[row][col][level]
         else:

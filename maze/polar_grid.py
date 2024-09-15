@@ -34,10 +34,7 @@ class PolarGrid(Grid):
 
             if row > 0:
                 # the last column has as clockwise neighbor the first column
-                if col < len(self.grid[row]) - 1:
-                    cell.add_neighbor("cw", self[row, col + 1])
-                else:
-                    cell.add_neighbor("cw", self[row, 0])
+                cell.add_neighbor("cw", self[row, col + 1])
                 cell.add_neighbor("ccw", self[row, col])
 
                 ratio = len(self.grid[row]) / len(self.grid[row - 1])
@@ -47,12 +44,16 @@ class PolarGrid(Grid):
                 cell.add_neighbor("inward", parent)
     
     def __getitem__(self, x):
-        return self.grid[x[0]][x[1] % len(self.grid[x[0]])]
-
-    # def random_cell(self):
-    #     row = random.randrange(0, self.rows)
-    #     col = random.randrange(0, self.columns)
-    #     return self[row, col]
+        row, column = x
+        if row in range(0, self.rows):
+            return self.grid[row][column % len(self.grid[row])]
+        else:
+            return None
+        
+    def random_cell(self):
+        row = random.randint(0, self.rows - 1)
+        col = random.randint(0, len(self.grid[row]) - 1)
+        return self[row, col]
 
     def to_img(self, cell_size=10, filename="grid.png"):
         img_size = 2 * self.rows * cell_size

@@ -24,8 +24,7 @@ class Grid:
                 cell.add_neighbor("south", self[row + 1, col])
 
     def __getitem__(self, x):
-        row = x[0]
-        col = x[1]
+        row, col = x
         if row in range(0, self.rows) and col in range(0, self.columns):
             return self.grid[row][col]
         else:

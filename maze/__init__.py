@@ -29,6 +29,7 @@ from .aldous_broder import *
 from .wilsons import *
 from .hunt_and_kill import *
 from .recursive_bakctracker import *
+from .recursive_bakctracker_circle import *
 from .kruskals import *
 from .prims import *
 from .growing_tree import *

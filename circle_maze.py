@@ -1,8 +1,8 @@
 from maze import PolarGrid
-from maze import RecursiveBacktracker
+from maze import RecursiveBacktrackerCircle
 
 grid = PolarGrid(8)
-RecursiveBacktracker.on(grid)
+RecursiveBacktrackerCircle.on(grid)
 
 filename = "cicle_maze.png"
 grid.to_img(filename=filename)

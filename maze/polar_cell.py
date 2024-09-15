@@ -16,3 +16,20 @@ class PolarCell(Cell):
                     yield elem
             else:
                 yield neighbor
+
+    def neighbors(self):
+        lst = []
+        if self.neighbor("cw"): lst.append(self.neighbor("cw"))
+        if self.neighbor("ccw"): lst.append(self.neighbor("ccw"))
+        if self.neighbor("inward"): lst.append(self.neighbor("inward"))
+        lst += self._outward
+        return lst
+    
+    def neighbors_for_random(self):
+        lst = []
+        if self.neighbor("cw"): lst.append(self.neighbor("cw"))
+        if self.neighbor("ccw"): lst.append(self.neighbor("ccw"))
+        if self.neighbor("inward"): lst.append(self.neighbor("inward"))
+        if len(self._outward) > 0: lst.append("outward")
+        return lst
+
