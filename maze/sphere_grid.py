@@ -28,7 +28,7 @@ class HemisphereGrid(PolarGrid):
             ratio = round(estimated_cell_width / angular_height)
             
             cells = int(previous_count * ratio)
-            maze.append([HemisphereCell(id, row, col) for col in range(0, cells)])
+            maze.append([HemisphereCell(self.id, row, col) for col in range(0, cells)])
 
         return maze
 
@@ -68,17 +68,17 @@ class SphereGrid(Grid):
     
     def to_img(self, ideal_size=10, filename="grid.png"):
         img_height = ideal_size * self.rows
-        img_width = int(len(self.grid[0][self.equator - 1]) * ideal_size)
+        img_width = int(self.size(self.equator - 1) * ideal_size)
 
         background = "white"
         wall = "black"
 
-        img = Image.New(
+        img = Image.new(
             "RGBA",
             (img_width + 1, img_height + 1),
             "white"
             )
-        draw = ImageDraw(img)
+        draw = ImageDraw.Draw(img)
 
         for cell in self.each_cell():
             row_size = self.size(cell.row)
@@ -100,13 +100,13 @@ class SphereGrid(Grid):
             y2 = round(y2)
 
             if cell.row > 0:
-                if not cell.contains_link(cell.cw): draw.line([x2, y1, x2, y2],
+                if not cell.contains_link(cell.neighbor("cw")): draw.line([x2, y1, x2, y2],
                           fill=wall)
-                if not cell.contains_link(cell.inward): draw.line([x1, y1, x2, y1],
+                if not cell.contains_link(cell.neighbor("inward")): draw.line([x1, y1, x2, y1],
                           fill=wall)
                     
             if cell.hemisphere == 0 and cell.row == self.equator - 1:
-                if not cell.contains_link(cell.outward[0]): draw.line([x1, y2, x2, y2],
+                if not cell.contains_link(cell.neighbor("outward")[0]): draw.line([x1, y2, x2, y2],
                           fill=wall)
                     
         img.save(filename)
