@@ -34,8 +34,8 @@ class HemisphereGrid(PolarGrid):
 
 class SphereGrid(Grid):
     def __init__(self, rows):
-        # if rows % 2 == 1:
-        #     raise Exception("argument must be an even number")
+        if rows % 2 == 1:
+            raise Exception("argument must be an even number")
         self.equator = round(rows / 2)
         super().__init__(rows, 1)
 
