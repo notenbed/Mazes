@@ -21,20 +21,21 @@ def save(grid, filename):
 
 grid = ColoredGrid(20, 20)
 start = grid.random_cell()
+row, column = start.row, start.column
 GrowingTree.on(select_random, grid, start_at=start)
 distances = start.distances()
 grid.distances(distances.cells)
 save(grid, "growing_tree_random.png")
 
 grid = ColoredGrid(20, 20)
-start = grid.random_cell()
+start = grid[row, column]
 GrowingTree.on(select_random, grid, start_at=start)
 distances = start.distances()
 grid.distances(distances.cells)
 save(grid, "growing_tree_last.png")
 
 grid = ColoredGrid(20, 20)
-start = grid.random_cell()
+start = grid[row, column]
 GrowingTree.on(select_random, grid, start_at=start)
 distances = start.distances()
 grid.distances(distances.cells)

@@ -62,7 +62,7 @@ class Grid:
         for cell in dead:
             if len(cell.links) != 1 or random.random() > p:
                 continue
-            neighbors = [x for x in cell.each_neighbor() if not cell.contains_link(x)]
+            neighbors = [x for x in cell.neighbors() if not cell.contains_link(x)]
             best = [x for x in neighbors if len(x.get_links()) == 1]
             if len(best) == 0: best = neighbors
             neighbor = random.choice(best)

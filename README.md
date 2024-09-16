@@ -1,10 +1,18 @@
 This is an python implementation of the examples in the book "Mazes for Programmers" by Jamis Buck published by The Pragmatic Programmers.
 
-I used the opportunity the experiment a little with pytest and therefor for a part of the code there are pytests available.
+It contains:
+- Different type of cells, e.g. normal, 3d, triangle, etc.
+- Grids that are build using these different type of cells
+- Algorithms to create mazes
+- Algorithm to solve and color the mazes
+- Demo programs to demonstrate the funtioning of the algorithms
+- Unit tests for a part of the code
+
+For visualization of the mazes the Pilgrim module is used.
+Pytest is used as the unit test framework.
 
 The following open topics exist:
 - Wilsons.py does not produce a proper result
-- Also the PolarCell contains a biased random pick (see also the errate sheet for the book)
-- ColoredGrid does not function with that start at an random self determined point
+- The PolarCell contains a biased random pick (see also the errate sheet for the book)
 - Mazes with inset don't get colored
 - Cube outlines are overwritten 

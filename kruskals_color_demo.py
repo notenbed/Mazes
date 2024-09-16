@@ -1,13 +1,15 @@
+from maze import Kruskals
 from maze import ColoredGrid
-from maze import RecursiveBacktracker
 
-grid = ColoredGrid(25, 25)
-RecursiveBacktracker.on(grid)
+grid = ColoredGrid(20, 20)
+Kruskals.on(grid)
+
+filename = "kriskals_colored.png"
 
 start = grid[round(grid.rows / 2), round(grid.columns / 2)]
 distances = start.distances()
 grid.distances(distances.cells)
 
-filename = "colorized_recursive_backtracker.png"
 grid.to_img(filename=filename)
-print("saved to ", filename)
+
+print("saved to", filename)

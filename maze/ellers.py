@@ -32,8 +32,8 @@ class Ellers:
             return Ellers.RowState(self.next_set)
         
         def each_set(self):
-            for set, cell in self.cells_in_set.items():
-                yield set, cell
+            for set, cells in self.cells_in_set.items():
+                yield set, cells
     
     def on(grid):
         row_state = Ellers.RowState()
@@ -47,7 +47,7 @@ class Ellers:
                 cell_set = row_state.set_for(cell)
                 prior_set = row_state.set_for(cell.neighbor("west"))
 
-                if prior_set != cell_set and (cell.neighbor("south") == 0 or random.randint(0, 2) == 0):
+                if prior_set != cell_set and (cell.neighbor("south") == None or random.randint(0, 1) == 0):
                     cell.link(cell.neighbor("west"))
                     row_state.merge(prior_set, cell_set)
             
@@ -57,7 +57,7 @@ class Ellers:
                 for set, cell_list in row_state.each_set():
                     random.shuffle(cell_list)
                     for index, cell in [(index, cell) for index, cell in enumerate(cell_list)]:
-                        if index == 0 or random.randint(0, 2):
+                        if index == 0 or random.randint(0, 2) == 0:
                             cell.link(cell.neighbor("south"))
                             next_row.record(row_state.set_for(cell), cell.neighbor("south"))
                 row_state = next_row

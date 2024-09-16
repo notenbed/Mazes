@@ -7,8 +7,8 @@ from PIL import Image, ImageDraw
 
 class HemisphereGrid(PolarGrid):
     def __init__(self, id, rows):
-        super().__init__(rows)
         self.id = id
+        super().__init__(rows)
 
     def size(self, row):
         return len(self[row])
@@ -17,33 +17,34 @@ class HemisphereGrid(PolarGrid):
         maze = []
         angular_height = math.pi / (2 * self.rows)
 
-        maze[0] = [HemisphereCell(self.id, 0, 0)]
+        maze.append([HemisphereCell(self.id, 0, 0)])
         for row in range(1, self.rows):
             theta = (row + 1) * angular_height
             radius = math.sin(theta)
             circumference = 2 * math.pi * radius
 
-            previous_count = len(self[row - 1])
+            previous_count = len(maze[row - 1])
             estimated_cell_width = circumference / previous_count
             ratio = round(estimated_cell_width / angular_height)
             
             cells = int(previous_count * ratio)
-            self[row] = [HemisphereCell(id, row, col) for col in range(0, cells)]
+            maze.append([HemisphereCell(id, row, col) for col in range(0, cells)])
 
         return maze
 
 class SphereGrid(Grid):
     def __init__(self, rows):
-        if rows % 2 == 0:
-            raise Exception("argument must be an even number")
+        # if rows % 2 == 1:
+        #     raise Exception("argument must be an even number")
+        self.equator = round(rows / 2)
         super().__init__(rows, 1)
-        self.equator = rows / 2
 
     def _prepare_grid(self):
-        return [HemisphereGrid(id, self.equator) for id in [0, 1]]
+        maze = [HemisphereGrid(id, self.equator) for id in [0, 1]]
+        return maze
     
     def __getitem__(self, x):
-        return self.grid[x[0]][x[1]][x[2]]
+        return self.grid[x[0]][x[1], x[2]]
     
     def _configure_cells(self):
         belt = self.equator - 1
@@ -53,7 +54,8 @@ class SphereGrid(Grid):
             b.extend_outward_neighbors(a)
 
     def size(self, row):
-        return len(self.grid[0][row])
+        hemi = self.grid[0]
+        return len(hemi.grid[row])
     
     def each_cell(self):
         for hemi in self.grid:

@@ -1,11 +1,11 @@
 from maze import SimplifiedPrims
 from maze import TruePrims
 from maze import ColoredGrid
-from maze import Grid
 
 grid = ColoredGrid(20, 20)
 
 start = grid.random_cell()
+row, column = start.row, start.column
 SimplifiedPrims.on(grid, start_at=start)
 
 distances = start.distances()
@@ -16,8 +16,8 @@ grid.to_img(filename=filename)
 print("saved to: ", filename)
 
 grid = ColoredGrid(20, 20)
-start = grid.random_cell()
-TruePrims.on(grid)
+start = grid[row, column]
+TruePrims.on(grid, start_at=start)
 
 distances = start.distances()
 grid.distances(distances.cells)
