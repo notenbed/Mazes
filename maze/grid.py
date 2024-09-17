@@ -141,7 +141,7 @@ class Grid:
     def _to_png_with_inset(self, draw, cell, mode, cell_size,  wall, x, y, inset):
         x1, x2, x3, x4, y1, y2, y3, y4 = self._cell_coordinates_with_inset(x, y, cell_size, inset)
 
-        if mode == "backgrounds":
+        if mode == "background":
             draw.rectangle((x2, y2, x3, y3),
                             fill=self.background_color_for(cell),
                             outline=None,

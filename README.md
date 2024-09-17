@@ -12,7 +12,4 @@ For visualization of the mazes the Pilgrim module is used.
 Pytest is used as the unit test framework.
 
 The following open topics exist:
-- Wilsons.py does not produce a proper result
-- The PolarCell contains a biased random pick (see also the errate sheet for the book)
-- Mazes with inset don't get colored
-- Cube outlines are overwritten 
+- The PolarCell contains a biased random pick (see also the errata sheet for the book). This effects the circular and sperical mazes.

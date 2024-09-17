@@ -22,6 +22,7 @@ from .cylinder_grid import *
 from .moebius_grid import *
 from .cube_grid import *
 from .sphere_grid import *
+from .weave_grid_colored import *
 
 from .binarytree import *
 from .sidewinder import *

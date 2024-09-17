@@ -1,8 +1,8 @@
-from maze import Grid
+from maze import ColoredGrid
 from maze import OverCell
 from maze import UnderCell
 
-class WeaveGrid(Grid):
+class WeaveGridColored(ColoredGrid):
     def __init__(self, rows, columns):
         self.under_cells = []
         super().__init__(rows, columns)

@@ -30,8 +30,8 @@ class Cell():
         self._neighbors[key] = value
     
     def random_neighbor(self):
-        selection = random.choice(list(self._neighbors.keys()))
-        return self.neighbor(selection)
+        selection = random.choice(self.neighbors())
+        return selection
 
     def link(self, cell, bidi=True):
         if cell != "" and cell != None:

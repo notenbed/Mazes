@@ -40,7 +40,7 @@ class CubeGrid(Grid):
         # dim_c = self.columns - 1
 
         if row < 0:
-            if face == 0: return 4, column, 0
+            if face == 0: return [4, column, 0]
             if face == 1: return [4, n, column]
             if face == 2: return [4, n - column, n]
             if face == 3: return [4, 0, n - column]
@@ -54,7 +54,7 @@ class CubeGrid(Grid):
             if face == 4: return [1, 0, column]
             if face == 5: return [3, n, n - column]
         elif column < 0:
-            if face == 0: return 3, row, n
+            if face == 0: return [3, row, n]
             if face == 1: return [0, row, n]
             if face == 2: return [1, row, n]
             if face == 3: return [2, row, n]
@@ -137,7 +137,7 @@ class CubeGrid(Grid):
 
         background = "white"
         wall = "black"
-        outline = (100, 100, 100)
+        outline = (100, 0, 0)
 
         img = Image.new(
             "RGBA",
@@ -148,7 +148,7 @@ class CubeGrid(Grid):
 
         self.draw_outlines(draw, face_width, face_height, outline)
 
-        for mode in ["backgroudn", "wall"]:
+        for mode in ["background", "wall"]:
             for cell in self.each_cell():
                 x = offsets[cell.face][0] * face_width + cell.column * cell_size
                 y = offsets[cell.face][1] * face_height + cell.row * cell_size
@@ -165,21 +165,21 @@ class CubeGrid(Grid):
         x2 = x1 + cell_size
         y2 = y1 + cell_size
 
-        if mode == "backgroudn":
+        if mode == "background":
             color = self.background_color_for(cell)
             if color != None:
                 img.rectangle(((x, y, x2, y2)),
                               fill=color,
                               outline=None,
                               width=0)
-            else:
-                if cell.neighbor("north").face != cell.face and not cell.contains_link(cell.neighbor("north")):
-                    img.line([x1, y1, x2, y1],
-                             fill=wall)
-                    
-                if cell.neighbor("west").face != cell.face and not cell.contains_link(cell.neighbor("west")):
-                    img.line([x1, y1, x1, y2],
-                             fill=wall)
+        else:
+            if cell.neighbor("north").face != cell.face and not cell.contains_link(cell.neighbor("north")):
+                img.line([x1, y1, x2, y1],
+                            fill=wall)
                 
-                if cell.contains_link(cell.neighbor("east")): img.line([x2, y1, x2, y2], fill=wall)
-                if cell.contains_link(cell.neighbor("south")): img.line([x1, y2, x2, y2], fill=wall)
+            if cell.neighbor("west").face != cell.face and not cell.contains_link(cell.neighbor("west")):
+                img.line([x1, y1, x1, y2],
+                            fill=wall)
+            
+            if cell.contains_link(cell.neighbor("east")): img.line([x2, y1, x2, y2], fill=wall)
+            if cell.contains_link(cell.neighbor("south")): img.line([x1, y2, x2, y2], fill=wall)

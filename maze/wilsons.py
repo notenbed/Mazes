@@ -15,7 +15,7 @@ class Wilsons:
                 cell = cell.random_neighbor()
                 if cell in path:
                     position = path.index(cell)
-                    path = path[0:position]
+                    path = path[0:position + 1]
                 else:
                     path.append(cell)
 
